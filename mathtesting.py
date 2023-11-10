@@ -3,7 +3,5 @@ class Mathtesting:
     def add(a, b):
         return a + b
 
-    def multiply():
-        a = 5
-        b = 10
+    def multiply(a, b):
         return a * b
