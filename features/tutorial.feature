@@ -9,6 +9,6 @@ Feature: showing off behave
     Given A calculator
     Then The sum of <a> and <b> is <sum>
     Examples: Sum
-    | a | b | sum |
-    | 2 | 5 | 7 |
-    | 3 | 5 | 8 |
+      | a | b | sum |
+      | 2 | 5 | 7 |
+      | 3 | 5 | 8 |
