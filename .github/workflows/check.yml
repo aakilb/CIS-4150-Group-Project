@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Pytest
+name: Pytest/Behave
 
 # Controls when the workflow will run
 on:
@@ -34,3 +34,9 @@ jobs:
         run: |
           pip install pytest
           pytest test_add.py
+
+      # Running Behave
+      - name: Runs a basic behave test
+        run: |
+          pip install behave
+          behave
