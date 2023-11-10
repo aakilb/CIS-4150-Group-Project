@@ -14,9 +14,9 @@ def step_impl(context):
     assert context.mathtest.add(2, 5) == 7
 
 @given('A calculator')
-def step_impl(context)
+def step_impl(context):
     context.calculator = Mathtesting()
 
 @then('The sum of {a:d} and {b:d} is {sum:d}')
-def step_impl(context, a, b, sum)
+def step_impl(context, a, b, sum):
     assert context.calculator.add(a, b) == sum
