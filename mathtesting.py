@@ -1,8 +1,6 @@
 class Mathtesting:
     @staticmethod
-    def add():
-        a = 2
-        b = 5
+    def add(a, b):
         return a + b
 
     def multiply():
