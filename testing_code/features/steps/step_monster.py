@@ -15,8 +15,8 @@ def step_impl(context, name, hp, dmg, action):
   assert isinstance(context.monster, Monster)
   print(context.monster.name)
   assert context.monster.name == name
-  assert context.mosnter.hp == hp
-  assert context.mosnter.max_hp == hp
+  assert context.monster.hp == hp
+  assert context.monster.max_hp == hp
   assert context.monster.dmg == dmg
   assert context.monster.action == action
 
