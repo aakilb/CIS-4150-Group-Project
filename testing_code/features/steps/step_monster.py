@@ -11,12 +11,21 @@ def step_impl(context, species):
   context.monster = give_monster(species, True)
 
 @given('an opponent {species}')
-def step_imp(context, species):
+def step_impl(context, species):
   context.opponent = give_monster(species)
 
+@given('the monster is dead')
+def step_impl(context):
+  context.monster.hp = 0
+  context.monster.update_data()
+
 @when('monster attacks opponent')
-def step_imp(context):
+def step_impl(context):
   context.monster.attack(context.opponent)
+
+@when('show monster "{size}" stats')
+def step_impl(context, size):
+  context.show_status = context.monster.show(size)
 
 @then('the monster {name} should have HP={hp:d} DMG={dmg:d} Action={action}')
 def step_impl(context, name, hp, dmg, action):
@@ -48,3 +57,14 @@ def step_impl(context):
   assert context.opponent.hp <= 0
   assert context.opponent.alive == False
   assert context.opponent.name.startswith('Dead ')
+
+@then('the monster status should be visible')
+def step_impl(context):
+  # NOTE: the newline characters are different - so remove them
+  show_status = context.show_status.splitlines()
+  text = context.text.splitlines()
+  assert show_status == text, f"{show_status} {text}"
+
+@then('the monster status should not be visible')
+def step_impl(context):
+  assert context.show_status == None
