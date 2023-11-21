@@ -1,6 +1,7 @@
 import pytest
 from monster import Monster
 from dicts.monsters import give_monster
+from dicts.monsters import MONSTER_VARIATION
 
 '''
 For demonstration purposes only.
@@ -66,6 +67,13 @@ def test_initialize(monster_species,expected_monster_name,expected_hp,expected_d
         assert monster.action == expected_action
     assert monster.length == 0
 
-
+#Initialize Pre-set Monster with Special Name
+@pytest.mark.parametrize("monster_species, expected_monster_name",[("chicken","Chicken"),("guard","Guard"),("bear","Bear"),("pbag","Punching-Bag")])
+def test_initialize_special(monster_species, expected_monster_name):
+    monster = give_monster(monster_species, True)
+    assert monster.name.endswith(expected_monster_name)
+    variation = MONSTER_VARIATION
+    for word in variation:
+        assert monster.name.find(word)
 
 
