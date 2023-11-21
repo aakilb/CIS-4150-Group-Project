@@ -1,15 +1,17 @@
 import pytest
 from monster import Monster
+from dicts.monsters import give_monster
 
 '''
+For demonstration purposes only.
+
 Initializing monsters. 2 tests are explored here to demonstrate Pytest's features.
 The first test uses fixtures to initialize the monsters. 4 fixtures are used to set 4
 instance variables. Each fixture has a set of 4 values. Each value will be set with each other
 value leading to 256 combinations(4^4). The second test uses parametrize to run 4 sets of instance
 variables leading to just 4 tests. 
 
-Note: For demonstration purposes only. The second method would likely be a better way to test initialization, unless
-you want to cover many scenarios.
+
 '''
 @pytest.fixture(params=["Chicken","Guard","Bear","Punching-Bag"])
 def monster_names(request):
@@ -43,4 +45,27 @@ def test_initialize_parametrize(monster_name,monster_hp,monster_dmg,monster_acti
     assert monster.hp in [1,2,4,10]
     assert monster.dmg in [1,2,2,0]
     assert monster.action in ["pinched","punched","slashed at","N/A"]
+
+'''
+Controlling Monsters. 
+Initializing monsters from a list and performing various actions.
+'''
+
+#Initialize Pre-set Monster
+@pytest.mark.parametrize("monster_species, expected_monster_name, expected_hp, expected_dmg, expected_action",[("chicken","Chicken",1,1,"pinched"),("guard","Guard",2,2,"punched"),("bear","Bear",4,2,"slashed at"),("pbag","Punching-Bag",10,0,"N/A")])
+def test_initialize(monster_species,expected_monster_name,expected_hp,expected_dmg,expected_action):
+    monster = give_monster(monster_species, False)
+    assert monster.name == expected_monster_name
+    assert monster.hp == expected_hp
+    assert monster.max_hp == expected_hp
+    assert monster.dmg == expected_dmg
+    assert monster.alive
+    if expected_action == "N/A":
+        assert monster.action == ""
+    else:
+        assert monster.action == expected_action
+    assert monster.length == 0
+
+
+
 
