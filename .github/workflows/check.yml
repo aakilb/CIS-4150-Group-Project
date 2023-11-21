@@ -52,3 +52,13 @@ jobs:
         run: |
           cd testing_code
           behave
+  pytest:
+     runs-on: ubuntu-latest
+     steps:
+      - uses: actions/checkout@v3
+      - name: Install PyTest
+        run: pip install pytest
+      - name: Run pytest
+        run: |
+          cd testing_code
+          pytest
