@@ -80,6 +80,7 @@ def test_initialize_special(monster_species, expected_monster_name):
 Monster performing actions
 '''       
 
+#Setup for tests
 @pytest.fixture
 def monster_attack(request):
     monster = give_monster(request.param[0])
@@ -101,5 +102,21 @@ def test_opponent_kill(monster_attack):
     assert opponent.hp <=0
     assert opponent.alive == False
     assert opponent.name.startswith('Dead ')
+
+'''
+Display stats about monsters
+'''
+
+#Show Max Monster Stats
+@pytest.mark.parametrize("monster_species,size", [("guard","max")])
+def test_show_max(monster_species,size):
+    monster = give_monster(monster_species)
+    expected_status = "┌------┐\n|Guard |\n|HP:2  |\n|DMG:2 |\n└------┘"
+    status = monster.show(size)
+    assert status == expected_status
+
+
+
+
 
 
