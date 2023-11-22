@@ -76,4 +76,30 @@ def test_initialize_special(monster_species, expected_monster_name):
     for word in variation:
         assert monster.name.find(word)
 
+'''
+Monster performing actions
+'''       
+
+@pytest.fixture
+def monster_attack(request):
+    monster = give_monster(request.param[0])
+    opponent = give_monster(request.param[1])
+    monster.attack(opponent)
+    return monster,opponent
+
+#Monster attacks an opponent
+@pytest.mark.parametrize("monster_attack",[("chicken","pbag")], indirect=True)
+def test_opponent(monster_attack):
+    monster,opponent = monster_attack
+    assert opponent.max_hp - opponent.hp == monster.dmg
+
+#Monster kills an opponent
+@pytest.mark.parametrize("monster_attack", [("guard","chicken")], indirect=True)
+def test_opponent_kill(monster_attack):
+    monster,opponent = monster_attack
+    assert opponent.max_hp - opponent.hp == monster.dmg
+    assert opponent.hp <=0
+    assert opponent.alive == False
+    assert opponent.name.startswith('Dead ')
+
 
