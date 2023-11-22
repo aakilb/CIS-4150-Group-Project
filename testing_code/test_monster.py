@@ -115,6 +115,42 @@ def test_show_max(monster_species,size):
     status = monster.show(size)
     assert status == expected_status
 
+#Show Max Monster Stats
+@pytest.mark.parametrize("monster_species,size", [("guard","min")])
+def test_show_min(monster_species,size):
+    monster = give_monster(monster_species)
+    expected_status = """┌------------------------┐
+|Guard |HP: ██ 2 |DMG: 2 |
+└------------------------┘"""
+    status = monster.show(size)
+    assert status == expected_status
+
+#Show Max Dead Monster Stats
+@pytest.mark.parametrize("monster_species,size", [("guard","max")])
+def test_show_dead_max(monster_species,size):
+    monster = give_monster(monster_species)
+    monster.hp = 0
+    monster.update_data
+    expected_status = """┌-----------┐
+|Dead Guard |
+└-----------┘"""
+    status = monster.show(size)
+    assert status == expected_status
+
+#Show Min Dead Monster Stats
+@pytest.mark.parametrize("monster_species,size", [("guard","min")])
+def test_show_dead_min(monster_species,size):
+    monster = give_monster(monster_species)
+    monster.hp = 0
+    monster.update_data
+    expected_status = """┌-----------┐
+|Dead Guard |
+└-----------┘"""
+    status = monster.show(size)
+    assert status == expected_status
+
+
+
 
 
 
