@@ -17,3 +17,10 @@ Feature: Controlling the Player
     When the player attacks a monster
     Then the monster took 3 DMG
     And the player's skill increases
+
+  @wip
+  Scenario: Player uses skill
+    Given a new Player with a fist
+    And a monster chicken
+    When the player uses double_trouble
+    Then the monster took 2 DMG
