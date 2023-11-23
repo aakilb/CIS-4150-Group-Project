@@ -8,4 +8,4 @@ def test_player():
     player = Player('TestPlayer', 20, WEAPONS[SWORD])
     assert player.name == 'TestPlayer'
     assert player.hp == 20
-    assert player.weapon == WEAPONS[DAGGER]
+    assert player.weapon == WEAPONS[SWORD]
