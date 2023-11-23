@@ -155,4 +155,3 @@ def test_user_attack(create_combat):
 
     assert combat.enemies_attack_msg != ' TestMonster hit you (-5HP)\n# You are perfectly healthy!'  # Enemies attack message should not be empty
     #print("\ncombat.enemies_attack_msg:", combat.enemies_attack_msg)
-    
