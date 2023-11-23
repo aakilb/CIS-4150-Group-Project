@@ -145,13 +145,40 @@ def test_enemies_alive(create_combat):
     combat.enemies[0].alive = False
     assert combat.enemies_alive() == 0
 
-# Test case for checking user attacks
-def test_user_attack(create_combat):
+# Test case for checking enemy attacks
+def test_enemy_attack(create_combat):
     combat = create_combat
 
     # Mocking the enemy attack to prevent actual damage to the user
     with mock.patch.object(combat.enemies[0], 'attack'):
         combat.enemies_attack()
 
-    assert combat.enemies_attack_msg != ' TestMonster hit you (-5HP)\n# You are perfectly healthy!'  # Enemies attack message should not be empty
+    assert combat.enemies_attack_msg != ' TestMonster hit you (-5HP)\n# You are perfectly healthy!'
     #print("\ncombat.enemies_attack_msg:", combat.enemies_attack_msg)
+     
+    combat.user.hp = 0
+    with mock.patch.object(combat.enemies[0], 'attack'):
+        combat.enemies_attack()
+    
+    #assert combat.enemies_attack_msg == ' !! TestMonster hit you (-5HP)\n# You are bleeding too much.. Argh!'
+    if 'You are bleeding too much.. Argh!' in combat.enemies_attack_msg:
+        assert True
+    else:
+        assert False
+    #print("\ncombat.enemies_attack_msg:", combat.enemies_attack_msg)
+        
+    combat.user.hp = combat.user.max_hp
+    with mock.patch.object(combat.enemies[0], 'attack'):
+        combat.enemies_attack()
+    
+    assert combat.enemies_attack_msg != ' TestMonster hit you (-5HP)\n# You are perfectly healthy!'
+    #print("\ncombat.enemies_attack_msg:", combat.enemies_attack_msg)
+
+def test_user_attack(create_combat):
+    combat = create_combat
+    enemy = combat.enemies[0]
+    with mock.patch.object(combat.user, 'attack'):
+        combat.user_attack(enemy)
+    
+    assert '# You sliced at TestMonster (-3HP)' in combat.user_attack_msg
+    #print("\ncombat.user_attack_msg:", combat.user_attack_msg)
