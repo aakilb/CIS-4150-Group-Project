@@ -1,2 +1,3 @@
 [behave]
-tags=~@wip
+default_tags=~@wip
+show_skipped=false
