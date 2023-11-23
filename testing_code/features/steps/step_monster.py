@@ -44,9 +44,16 @@ def step_impl(context, name, hp, dmg, action):
 @then('the monster {name} should have special name')
 def step_impl(context, name):
   assert isinstance(context.monster, Monster)
-  assert context.monster.name.endswith(name)
-  # TODO: Assert there is something before `name`?
-  assert context.monster.name.find(name) > 0
+  names = context.monster.name.split(' ')
+  assert len(names) == 2
+  # Assert the name is correct
+  assert names[1] == name
+  # Check if special name is one of the valid options
+  is_variation = False
+  for r in context.table:
+    if names[0] == r["variation"]:
+      is_variation = True
+  assert is_variation
 
 @then('opponent took {dmg_taken:d} DMG')
 def step_impl(context, dmg_taken):

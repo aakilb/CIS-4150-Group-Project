@@ -14,6 +14,21 @@ Feature: Controlling Monsters
   Scenario: Initialize Pre-set Monster with Special Name
     Given give special monster chicken
     Then the monster Chicken should have special name
+      | variation |
+      | Ruthless |
+      | Ferocious |
+      | Demonic |
+      | Brutal |
+      | Bloody |
+      | Violent |
+      | Wild |
+      | Spooky |
+      | Murderous |
+      | Fierce |
+      | Savage |
+      | Monsterous |
+      | Hideous |
+      | Grotesque |
 
   Scenario: Monster attacks an opponent
     Given give_monster chicken
