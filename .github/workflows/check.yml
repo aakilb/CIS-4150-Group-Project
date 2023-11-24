@@ -66,3 +66,7 @@ jobs:
         run: |
           cd testing_code
           pytest
+      - name: Run pytest using initialize marker
+        run: |
+          cd testing_code
+          pytest -m initialize
