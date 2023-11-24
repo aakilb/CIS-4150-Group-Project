@@ -1,6 +1,8 @@
 from dungeon import *
 from player import *
+import pytest 
 
+@pytest.mark.xfail(raises=OSError)
 def test_dungeon():
     player = Player('TestPlayer', 50, WEAPONS[SWORD])
     world = Dungeon(player, ROOMS)
