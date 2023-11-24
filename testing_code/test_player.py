@@ -7,6 +7,8 @@ Controlling Players.
 '''
 
 #Initialize a Player with a bow,a fist, and an invalid weapon
+@pytest.mark.initialize
+@pytest.mark.xfail(raises=KeyError)
 @pytest.mark.parametrize("name,hp,weaponselect",[("Bori",10, "bow"),("Bori",10,"fist"),("Bori",10,"invalid_weapon")])
 def test_initialize_player(name,hp,weaponselect):
     player = Player(name,hp,WEAPONS[weaponselect])

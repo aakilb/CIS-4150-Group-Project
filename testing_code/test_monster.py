@@ -53,6 +53,7 @@ Initializing monsters from a list and performing various actions.
 '''
 
 #Initialize Pre-set Monster
+@pytest.mark.initialize
 @pytest.mark.parametrize("monster_species, expected_monster_name, expected_hp, expected_dmg, expected_action",[("chicken","Chicken",1,1,"pinched"),("guard","Guard",2,2,"punched"),("bear","Bear",4,2,"slashed at"),("pbag","Punching-Bag",10,0,"N/A")])
 def test_initialize(monster_species,expected_monster_name,expected_hp,expected_dmg,expected_action):
     monster = give_monster(monster_species, False)
@@ -68,6 +69,7 @@ def test_initialize(monster_species,expected_monster_name,expected_hp,expected_d
     assert monster.length == 0
 
 #Initialize Pre-set Monster with Special Name
+@pytest.mark.initialize
 @pytest.mark.parametrize("monster_species, expected_monster_name",[("chicken","Chicken"),("guard","Guard"),("bear","Bear"),("pbag","Punching-Bag")])
 def test_initialize_special(monster_species, expected_monster_name):
     monster = give_monster(monster_species, True)

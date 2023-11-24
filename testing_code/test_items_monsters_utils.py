@@ -1,7 +1,9 @@
 from dicts.items import ITEMS, get_tag_items, COIN_VALUE
 from dicts.monsters import MONSTER_SPECIES, COMBAT_LEVELS
 from dicts.utils import use_an, typewriter
+import pytest
 
+@pytest.mark.initialize
 def test_get_tag_items():
     item_names = ['apple', 'cake', 'bread', 'coin']
     food_items = get_tag_items(item_names, 'food')

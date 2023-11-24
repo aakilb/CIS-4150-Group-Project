@@ -35,6 +35,7 @@ def enemy_dmg(request):
 def enemy_action(request):
     return request.param
 
+@pytest.mark.initialize
 def test_initialize_users(user_names, user_hp, user_weapons):
     # Create users from player object 
     users = Player(user_names, user_hp, user_weapons)
@@ -43,6 +44,7 @@ def test_initialize_users(user_names, user_hp, user_weapons):
     assert users.hp in [50, 25, 10, 5]
     assert users.weapon in [WEAPONS[SWORD], WEAPONS[DAGGER], WEAPONS[FIST], WEAPONS[BOW]]
 
+@pytest.mark.initialize
 def test_initialize_enemy(enemy_names, enemy_hp, enemy_dmg, enemy_action):
     # Create enemies from monster object
     enemys = Monster(enemy_names, enemy_hp, enemy_dmg, enemy_action)
