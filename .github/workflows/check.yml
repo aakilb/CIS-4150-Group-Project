@@ -25,21 +25,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Display testing message
-        run: echo Running PyTest
+      # # Runs a single command using the runners shell
+      # - name: Display testing message
+      #   run: echo Running PyTest
 
-      # Running PyTest
-      - name: Runs a basic pytest check
-        run: |
-          pip install pytest
-          pytest test_add.py
+      # # Running PyTest
+      # - name: Runs a basic pytest check
+      #   run: |
+      #     pip install pytest
+      #     pytest test_add.py
 
-      # Running Behave
-      - name: Runs a basic behave test
-        run: |
-          pip install behave
-          behave
+      # # Running Behave
+      # - name: Runs a basic behave test
+      #   run: |
+      #     pip install behave
+      #     behave
   behave:
     runs-on: ubuntu-latest
     steps:
@@ -48,10 +48,14 @@ jobs:
         run: pip install behave
       - name: Runs a basic behave test
         run: behave
-      - name: Runst behave test on test_code
+      - name: Runs behave test on test_code
         run: |
           cd testing_code
           behave
+      - name: Runs wip tests on test_code
+        run: |
+          cd testing_code
+          behave --tags wip
   pytest:
      runs-on: ubuntu-latest
      steps:
