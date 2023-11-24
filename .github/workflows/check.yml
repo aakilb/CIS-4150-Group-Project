@@ -70,3 +70,8 @@ jobs:
         run: |
           cd testing_code
           pytest -m initialize
+      - name: Run a cleaner looking report
+        run: |
+          pip install pytest-sugar
+          cd testing_code
+          pytest -m initialize
