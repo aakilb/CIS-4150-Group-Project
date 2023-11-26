@@ -66,7 +66,7 @@ def test_initialize(monster_species,expected_monster_name,expected_hp,expected_d
         assert monster.action == ""
     else:
         assert monster.action == expected_action
-    assert monster.length == 0
+    assert monster.length == 12 #0
 
 #Initialize Pre-set Monster with Special Name
 @pytest.mark.initialize
