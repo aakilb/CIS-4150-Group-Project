@@ -1,26 +1,28 @@
 from behave import *
 from mathtesting import *
 
-@given('we have 2 numbers to calculate')
-def step_impl(context):
-    context.mathtest = Mathtesting()
+@given('we have 2 numbers to calculate: {a:d} and {b:d}')
+def step_impl(context, a, b):
+    # given 2 numbers
+    context.num1 = a
+    context.num2 = b
 
 @given('a calculator')
 def step_impl(context):
-    context.calculator = Mathtesting()
+    # create the instance of Mathtesting
+    context.mathtest = Mathtesting()
 
 @when('we add them together')
-def step_impl(context):
-    context.mathtest.add(2, 5)
+def add_two_numbers(context):
+    # perform the add method
+    context.result = context.mathtest.add(context.num1, context.num2)
 
-@then('the result will be 7')
-def step_impl(context):
-    assert context.mathtest.add(2, 5) == 7
+@when('we multiply them together')
+def multiply_two_numbers(context):
+    # perform the multiply method
+    context.result = context.mathtest.multiply(context.num1, context.num2)
 
-@then('the sum of {a:d} and {b:d} is {sum:d}')
-def step_impl(context, a, b, sum):
-    assert context.calculator.add(a, b) == sum
-
-@then('the product of {a:d} and {b:d} is {product:d}')
-def step_impl(context, a, b, product):
-    assert context.calculator.multiply(a, b) == product
+@then('the result will be {results:d}')
+def step_impl(context, results):
+    # assert the results match the expected value
+    assert context.result == results, f"{context.result} != {results}"
